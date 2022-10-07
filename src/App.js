@@ -16,7 +16,6 @@ function App() {
   const [filters, setFilters] = React.useState({});
 
   function handleFilterChange(key, value) {
-    console.log(key, value);
     setFilters(prevState => ({
       ...prevState,
       [key]: value
@@ -68,8 +67,6 @@ function App() {
       return acc;
     }, {});
   }, [groupedData]);
-
-  console.log("aggregatedData", aggregatedData);
 
   if (loading) {
     return <div className="App">Loading...</div>;
@@ -220,17 +217,18 @@ function Select({ options, label, value, onChange }) {
     </div>
   );
 }
-export default App;
 
 function getFilterOptions(data) {
   return {
-    years: getDeDupedOptions(data, "year"),
-    quarters: getDeDupedOptions(data, "quarter"),
-    homeOwnerships: getDeDupedOptions(data, "homeOwnership"),
-    terms: getDeDupedOptions(data, "term")
+    years: getDedupedOptions(data, "year"),
+    quarters: getDedupedOptions(data, "quarter"),
+    homeOwnerships: getDedupedOptions(data, "homeOwnership"),
+    terms: getDedupedOptions(data, "term")
   };
 }
 
-function getDeDupedOptions(data, key) {
+function getDedupedOptions(data, key) {
   return [...new Set(data.map(item => item[key]).filter(item => item))].sort();
 }
+
+export default App;
